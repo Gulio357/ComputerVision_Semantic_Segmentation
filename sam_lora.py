@@ -1,3 +1,5 @@
+# The code for sam_lora.py is from: https://github.com/JamesQFreeman/Sam_LoRA/tree/main
+
 # Sheng Wang at Apr 6 2023
 # What a time to be alive (first half of 2023)
 
