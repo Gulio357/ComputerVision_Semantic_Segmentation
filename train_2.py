@@ -1,5 +1,5 @@
-from utils import *
-from model import *
+from utils_2 import *
+from model_2 import *
 from data import *
 
 from pytorch_lightning.loggers import CSVLogger
