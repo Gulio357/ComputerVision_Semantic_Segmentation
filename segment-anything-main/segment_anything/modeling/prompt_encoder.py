@@ -68,7 +68,10 @@ class PromptEncoder(nn.Module):
           torch.Tensor: Positional encoding with shape
             1x(embed_dim)x(embedding_h)x(embedding_w)
         """
-        return self.pe_layer(self.image_embedding_size).unsqueeze(0)
+        # return self.pe_layer(self.image_embedding_size).unsqueeze(0)
+
+        # Modified
+        return self.pe_layer((self.image_embedding_size[0]//4, self.image_embedding_size[1]//4)).unsqueeze(0)
 
     def _embed_points(
         self,
@@ -161,8 +164,15 @@ class PromptEncoder(nn.Module):
         if masks is not None:
             dense_embeddings = self._embed_masks(masks)
         else:
+            # dense_embeddings = self.no_mask_embed.weight.reshape(1, -1, 1, 1).expand(
+            #     bs, -1, self.image_embedding_size[0], self.image_embedding_size[1]
+            # )
+
+
+            # Modified
+
             dense_embeddings = self.no_mask_embed.weight.reshape(1, -1, 1, 1).expand(
-                bs, -1, self.image_embedding_size[0], self.image_embedding_size[1]
+                bs, -1, self.image_embedding_size[0]//4, self.image_embedding_size[1]//4
             )
 
         return sparse_embeddings, dense_embeddings

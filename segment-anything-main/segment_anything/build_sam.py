@@ -108,18 +108,9 @@ def _build_sam(
                   'mask_decoder.iou_prediction_head.layers.2.weight', 
                   'mask_decoder.iou_prediction_head.layers.2.bias']
 
-        for key in keys_to_remove:
-            if key in state_dict:
-                del state_dict[key]
-        sam.load_state_dict(state_dict, strict=False)
+        # for key in keys_to_remove:
+        #     if key in state_dict:
+        #         del state_dict[key]
+        # sam.load_state_dict(state_dict, strict=False)
 
-        # for name, param in sam.named_parameters():
-        #   # if name in checkpoint and param.size() == checkpoint[name].size():
-        #   #     param.data.copy_(checkpoint[name])
-        #   # else:
-        #   #     print(f"Skipping {name} due to size mismatch or missing key")
-        #   try:
-        #     param.data.copy_(checkpoint[name])
-        #   except:
-        #     print(f"Skipping {name}")
     return sam
