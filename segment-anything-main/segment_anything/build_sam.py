@@ -106,11 +106,12 @@ def _build_sam(
         # NOTE: modified
         keys_to_remove = ['mask_decoder.mask_tokens.weight', 
                   'mask_decoder.iou_prediction_head.layers.2.weight', 
-                  'mask_decoder.iou_prediction_head.layers.2.bias']
+                  'mask_decoder.iou_prediction_head.layers.2.bias',
+                  'image_encoder.pos_embed']
 
-        # for key in keys_to_remove:
-        #     if key in state_dict:
-        #         del state_dict[key]
-        # sam.load_state_dict(state_dict, strict=False)
+        for key in keys_to_remove:
+            if key in state_dict:
+                del state_dict[key]
+        sam.load_state_dict(state_dict, strict=False)
 
     return sam
